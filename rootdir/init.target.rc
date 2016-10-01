@@ -92,14 +92,17 @@ on post-fs-data
 on fs
     # zram
     swapon_all /fstab.smdk4x12
+	setprop ro.radio.noril yes
 
 on boot
+	stop ril-daemon
 # cbd
 service cpboot-daemon /sbin/cbd -d
     class main
     user root
     group radio cache inet misc audio sdcard_rw log
     seclabel u:r:cpboot-daemon:s0
+	disabled
 
 
 # Start GPS daemon
